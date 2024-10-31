@@ -15,7 +15,7 @@
        <button type="submit">Login</button>
     </form>
     <?php
-        if(isset($_POST['nom']))
+        if(isset($_POST['nom']) && isset($_POST['password']))
         {
             echo "Le nom de l'utilisateur est : ".$_POST['nom'];
             echo"<br>";

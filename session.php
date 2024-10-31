@@ -8,25 +8,34 @@
 <body>
     
     <form action="" name="connexion" method="POST">
-        Entrez votre nom : <input type="text" name="nom"><br>
-        Entrez votre passwd : <input type="text" name="passwd"><br>
+        Entrez votre nom : 
+        <input type="text" name="nom"><br><br>
+        Entrez votre passwd : 
+        <input type="text" name="passwd"><br>
         <input type="submit" name="valider" value="ok">
     </form>
 
     <?php
-    session_start();
+   // session_start();
 
-    if(($_POST['nom']=="Admin")&&($_POST['passwd']=="Admin"))
+    if(isset($_POST['nom']) && isset($_POST['passwd']))
     {
-        $_SESSION['nom']=$_POST['nom'];
-        $_SESSION['passwd']=$_POST['passwd'];
+        if(($_POST['nom']=="Admin")&&($_POST['passwd']=="Admin"))
+        {
+            setcookie("nom",$_POST['nom'],time()+60,TRUE);
+            setcookie("CB",$_POST['passwd'],time()+60,TRUE);
+            // $_SESSION['nom']= $_POST['nom'];
+            // $_SESSION['passwd']=$_POST['passwd'];
+    
+            header('Location:info.php');
+        }
+        else
+        {
+            echo"mot de passe ou login incorrect";
+        }
 
-        header('Location:info.php');
     }
-    else
-    {
-        echo"mot de passe ou login incorrect";
-    }
+   
    
     ?>
 </body>

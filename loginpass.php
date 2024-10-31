@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-<form action="" method="GET">
+<form action="" method="POST">
        <h1>Formulaire de Connexion</h1>
        <label for="Login">Last Name</label>
        <input type="text" name="login" placeholder="Login"><br><br>
@@ -16,14 +16,16 @@
 
 
        <?php
-            
-            if(isset($_GET['login']))
+            session_start();
+            if(isset($_POST['login']))
             {
-                echo "Le nom de l'utilisateur est : ".$_GET['login'];
+                echo "Le nom de l'utilisateur est : ".$_POST['login'];
                 echo"<br>";
-                echo "Le prenom de l'utilisateur est : ".$_GET['password'];
+                echo "Le prenom de l'utilisateur est : ";
                 echo"<br>";
-                loginBDD($_GET['login'],$_GET['password']);
+                $_SESSION['login']=$_POST['login'];
+                $_SESSION['passwd']=$_POST['password'];
+                loginBDD($_POST['login'],$_POST['password']);
 
                 
         
@@ -41,7 +43,8 @@
                     $req=mysqli_query($connect,"SELECT * FROM users WHERE login='$log' AND passwd='$passwd'");
                     if(mysqli_num_rows($req)>0)
                     {
-                      echo "vous êtes connecté";
+                        header('Location:welcome1.php');
+                        exit();
                     }
                     else
                     {

@@ -22,7 +22,6 @@
                 echo"<br>";
                 echo "Le prenom de l'utilisateur est : ".$_GET['password'];
                 echo"<br>";
-                
                 insertBDD($_GET['login'],$_GET['password']);
                 
 
